@@ -19,25 +19,32 @@ export class AppComponent {
   ];
 
   // initialize cart to pump into cart component
-  // cart has name, imageurl and quantity
   cartData: Fruit[] = []; // initially empty
 
   // add fruit to cart
+  // fruit is the reference to the fruit object in the cart
   protected addToCart(fruit: Fruit)
   {
     if(!this.cartData.includes(fruit)) // if fruit is not in cart
     {
       console.log("parent fruit: ", fruit)
-      fruit.quantity++;
+      fruit.quantity = 1;
       this.cartData.push(fruit);
+      console.log('fruitsData: ', this.fruitsData, "cartData: ", this.cartData)
     }
-    else // if fruit is in cart
-    {
-      fruit.quantity++;
-      console.log("parent fruit: ", fruit)
-    }
+  }
 
-    console.log("parent cart: ", this.cartData)
+  
+  // protected handleRemove(fruit: Fruit)
+  // {
+  //   fruit.quantity = 0 // this reference both cartData and fruitsData
+  // } 
+  // 
+
+  protected handleRemove(idx: number)
+  {
+    this.cartData.splice(idx, 1) // removes from cartData for re-adding
+    // cartData is being reference by cart component
   }
 
   

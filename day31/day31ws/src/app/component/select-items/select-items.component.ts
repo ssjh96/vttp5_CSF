@@ -10,13 +10,11 @@ import { Fruit } from '../../model';
 })
 export class SelectItemsComponent 
 {
-  picture = '/fruits/strawberry.png'
+  // picture = '/fruits/strawberry.png'
   
-  @Input()
-  fruits: Fruit[] = []; // to receive fruits from parent 
+  @Input() fruits: Fruit[] = []; // to receive fruits from parent 
   
-  @Output()
-  onSelect = new Subject<Fruit>() // to send selected fruit to parent 
+  @Output() onSelect = new Subject<Fruit>() // to send selected fruit to parent 
 
   protected itemSelected(fruit: Fruit)
   { 

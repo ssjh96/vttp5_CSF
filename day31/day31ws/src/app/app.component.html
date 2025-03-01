@@ -4,7 +4,8 @@
     <!-- (onSelect) is component output, "addToCart()" is parent method -->
     <app-select-items [fruits]="fruitsData" (onSelect)="addToCart($event)"></app-select-items>
 
-    <!--  -->
-    <app-cart [cart]="cartData"></app-cart>
+    <!-- [cart] is component input, "cartData is parent component" -->
+    <!-- (onRemove) is component output, "handleRemove()" is parent method -->
+    <app-cart [cart]="cartData" (onRemove)="handleRemove($event)"></app-cart>
 </div>
 {{cartData | json}}

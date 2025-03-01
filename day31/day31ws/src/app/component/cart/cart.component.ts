@@ -1,5 +1,6 @@
 import { Component, Input, Output } from '@angular/core';
 import { Fruit } from '../../model';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-cart',
@@ -11,19 +12,26 @@ export class CartComponent {
 
   @Input()
   cart: Fruit[] = [];
+
+  // @Output() onRemove = new Subject<Fruit>();
+  @Output() onRemove = new Subject<number>();
   
   protected removeFruit(idx: number)
   {
-    this.cart.splice(idx, 1);
-    console.log("cart component cart: ", this.cart)
+    // const removeFruit = this.cart[idx] // get the fruit that is being removed
+    this.onRemove.next(idx) // emit event to notify appComponent
   }
 
+
+  // fruit is the reference to the fruit object in the cart
   protected decrementQuantity(idx: number, fruit: Fruit)
   {
     if(fruit.quantity == 1)
     {
       console.log("idx: ", idx, "cart component fruit: ", fruit)
-      this.cart.splice(idx, 1); // remove fruit from cart if only 1 left
+      
+      // this.cart.splice(idx, 1); // remove fruit from cart if only 1 left
+      this.removeFruit(idx)
     }
     else
     {
@@ -32,7 +40,14 @@ export class CartComponent {
     }
 
     console.log("cart component cart: ", this.cart)
+  }
 
+  
+
+  protected incrementQuantity(idx: number, fruit: Fruit)
+  {
+    fruit.quantity++;
+    console.log("cart component cart: ", this.cart)
   }
 
 }
