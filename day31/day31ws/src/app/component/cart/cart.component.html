@@ -1,1 +1,30 @@
-<p>cart works!</p>
+<h1>Please select a fruit!</h1>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Image</th>
+            <th>Quantity</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (fruit of cart; let idx = $index; track fruit) {
+            <tr>
+                <td>
+                    <p>{{fruit.name | titlecase}}</p>
+                </td>
+                <td>
+                    <img [src]="fruit.image" alt="fruit.name">
+                </td>
+                <td>
+                    <p>{{fruit.quantity}}</p>
+                </td>
+                <td>
+                    <button (click)="removeFruit(idx)">delete</button>
+                    <button (click)="decrementQuantity(idx, fruit)">-</button>
+                </td>                    
+            </tr>  
+        }
+    </tbody>
+</table>

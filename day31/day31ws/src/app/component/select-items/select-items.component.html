@@ -1,2 +1,25 @@
-<p>select-items works!</p>
-<img src={{picture}}>
+<h1>Please select a fruit!</h1>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Image</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (fruit of fruits; let idx = $index; track fruit) {
+            <tr>
+                <td>
+                    <p>{{fruit.name | titlecase}}</p>
+                </td>
+                <td>
+                    <img [src]="fruit.image" alt="fruit.name">
+                </td>
+                <td>
+                    <button (click)="itemSelected(fruit)">Add</button>
+                </td>                    
+            </tr>  
+        }
+    </tbody>
+</table>

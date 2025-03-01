@@ -1,6 +1,10 @@
 {{title}}
-<div>
-    
+<div class="side-by-side">
+    <!-- [fruits] is component input, "fruitsData" is parent attribute -->
+    <!-- (onSelect) is component output, "addToCart()" is parent method -->
+    <app-select-items [fruits]="fruitsData" (onSelect)="addToCart($event)"></app-select-items>
+
+    <!--  -->
+    <app-cart [cart]="cartData"></app-cart>
 </div>
-<app-select-items></app-select-items>
-<app-cart></app-cart>
+{{cartData | json}}

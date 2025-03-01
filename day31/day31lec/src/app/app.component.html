@@ -8,7 +8,7 @@
     @for (t of texts; let idx = $index; track t) 
     {
       <li>
-        <app-text [text]="t" (totalClicks)="whenTotalClicks(idx, $event)"></app-text>
+        <app-text [text]="title" (totalClicks)="whenTotalClicks(idx, $event)"></app-text>
       </li>
     }
   </ol>

@@ -1,5 +1,6 @@
-import { Component, Output } from '@angular/core';
+import { Component, Input, Output } from '@angular/core';
 import { Subject } from 'rxjs';
+import { Fruit } from '../../model';
 
 @Component({
   selector: 'app-select-items',
@@ -11,12 +12,16 @@ export class SelectItemsComponent
 {
   picture = '/fruits/strawberry.png'
   
+  @Input()
+  fruits: Fruit[] = []; // to receive fruits from parent 
+  
   @Output()
-  onSelect = new Subject<number>()
+  onSelect = new Subject<Fruit>() // to send selected fruit to parent 
 
-  protected itemSelected(event: any)
-  {
-
+  protected itemSelected(fruit: Fruit)
+  { 
+    console.log("select component fruit: ", fruit)
+    this.onSelect.next(fruit); // Emit selected fruit to parent
   }
 
 }
