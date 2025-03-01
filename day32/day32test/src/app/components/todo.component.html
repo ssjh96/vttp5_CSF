@@ -1,0 +1,92 @@
+<h3 class="text-decoration-underline">TODO List</h3>
+
+<!-- Bind FormGroup and attach ngSubmit -->
+<form [formGroup]="todoForm" (ngSubmit)="processForm()">
+    
+
+    <!-- <table>
+
+        <thead>
+            <tr>
+                <th>S/N</th>
+                <th>Date</th>
+                <th>Description</th>
+                <th>Priority</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+
+        <tbody formArrayName="todoArray">
+            <tr *ngFor="let todo of todoArray.controls; let idx=index; track todo" [formGroupName]="idx">
+                
+                <td> {{ idx + 1}} </td>
+                <td><input type="date" formControlName="date"></td>    
+                <td><input type="text" formControlName="description"></td>
+                <td>
+                    <select formControlName="priority">
+                        <option value="low">Low</option>
+                        <option value="medium">Medium</option>
+                        <option value="high">High</option>
+                    </select>
+                </td>
+                <td></td>
+            </tr>
+        </tbody>
+
+    </table>
+    
+    <br> -->
+    
+    <!-- Table 2 Example @For -->
+    <table>
+
+        <thead>
+            <tr>
+                <th>S/N</th>
+                <th>Date</th>
+                <th>Description</th>
+                <th>Priority</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+
+        <!-- formArrayName must match the key name we put in the todoForm
+        If todoForm = this.fb.group({ todoArray: this.fb.array([]) }), 
+        then formArrayName="todoArray". -->
+        <tbody formArrayName="todos"> 
+            @for (todo of todoArray.controls; let idx = $index; track todo) {
+                <tr [formGroupName]="idx">
+
+                    <td> {{ idx + 1}} </td>
+                    <td><input type="date" formControlName="date"></td>
+                    <td><input type="text" formControlName="description"></td>
+                    <td>
+                        <select formControlName="priority">
+                            <option value="low">Low</option>
+                            <option value="medium">Medium</option>
+                            <option value="high">High</option>
+                        </select>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-danger" (click)="removeTodoGroup(idx)">X</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+
+    <!-- we need to bind the todoArray FormArray to the body's data -->
+    <!-- formArrayName (without []) is a built-in Angular directive. -->
+    <!-- It tells Angular: “Look inside todoForm, find todoArray, and use it here."-->
+
+    <!-- idx is dynamic, so it must be bound correctly. Using [formGroupName] is more recommended -->
+    <!-- [formGroupName]="idx" means: "Get the FormGroup at index idx inside todoArray". idx is treated as a dynamic number, not a string. -->
+
+    <br>
+    
+
+    <!-- button for adding new todo -->
+    <button type="button" (click)="addTodoGroup()">Add Todo</button>
+    <button type="submit" [disabled]="todoForm.invalid">Submit Todo</button>
+</form>

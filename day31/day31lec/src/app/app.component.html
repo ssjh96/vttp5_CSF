@@ -1,0 +1,57 @@
+<h1>{{ title }} | ( {{ allClicks }} )</h1>
+
+ <app-text-input (onNewText)="whenNewText($event)"></app-text-input>
+
+@if (texts.length > 0)
+{
+  <ol>
+    @for (t of texts; let idx = $index; track t) 
+    {
+      <li>
+        <app-text [text]="t" (totalClicks)="whenTotalClicks(idx, $event)"></app-text>
+      </li>
+    }
+  </ol>
+}
+@else {
+  <h2>No phrases to display</h2>
+}
+
+
+
+<!-- <app-text text="Hello world"></app-text>
+<app-text text="The weekend is near"></app-text>
+<app-text text="{{ myText }}"></app-text> -->
+
+<!-- Attribute binding - everything on the right side of a binding is javascript, myText is smth we defined-->
+<!-- <app-text [text] ="myText"></app-text> -->
+
+<!-- To use attribute binding, we need convert hello world to string, thn can display if we dont have this defined -->
+<!-- <app-text [text]=" 'Hello_world' "></app-text>  -->
+
+<!-- attr = "abc" // this is literal -->
+<!-- [attr] = " 'abc' " // this is a string -->
+<!-- [attr] = "abc" // this is a member -->
+<!-- attr = "{{ abc }}" // this is evaluate? -->
+
+<!-- similar to data-th-each -->
+<!-- @for (t of texts; let idx = $index; track t) 
+{
+  <app-text [text]="t"></app-text>
+   
+  String concatenation, adding +'' converts to string, if not index is number cannot bind since text is string (we define just now in text.component.ts)
+  <app-text [text]="idx + ': ' + t"></app-text> 
+  
+} -->
+
+<!-- <ol>
+  @for (t of texts; let idx = $index; track t) 
+  {
+    <li>
+      <app-text [text]="t" (totalClicks)="whenTotalClicks(idx, $event)"></app-text> 
+    </li>
+  }
+</ol> -->
+
+<!-- child pass data to parent thru events -->
+ <!-- parent pass data to child thru attributes -->

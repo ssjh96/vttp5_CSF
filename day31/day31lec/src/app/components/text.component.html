@@ -1,0 +1,21 @@
+<h3 (click)="textClicked()" (mouseenter)="clearCounter()">
+    {{text | titlecase}} ( {{ counter }} )
+</h3>
+
+<button type="button" (click)="firedClicks($event)">Send event</button>
+
+
+
+<!-- use the function we defined in text.component.ts -->
+<!-- <h3 (click)="textClicked()" (mouseenter)="clearCounter()">
+    This is text component! {{text | uppercase}} ( {{ counter }} )
+</h3> -->
+
+
+<!-- click is the event, when i click, we get firedClicks() to appen -->
+<!-- First character of everycase uppercase -->
+<!-- <h3>This is text component! {{text | titlecase}}</h3>  -->
+
+
+<!-- child pass data to parent thru events -->
+ <!-- parent pass data to child thru attributes -->

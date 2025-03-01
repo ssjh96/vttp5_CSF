@@ -1,0 +1,143 @@
+<h3>Todo Task</h3>
+
+<form [formGroup]="form" (submit)="processForm()"> 
+    <!-- after importing, form tags show [_ɵNgNoValidate, _NgControlStatusGroup] -->
+
+    <ul>
+        <li>Form valid: {{ form.valid }}</li>
+        <li>Form invalid: {{ form.invalid }}</li>
+
+        <!-- what is ?  - optional chaining -->
+         <!-- ? (optional chaining) prevents errors if 'form.get('taskName')' is null -->
+        <!-- Instead of throwing an error, it returns 'undefined' -->
+         
+        <!-- Show green border when valid, red border when invalid -->
+        <!-- <input type="text" formControlName="taskName"
+        [ngClass]="{ 
+            'valid': form.get('taskName')?.valid, 
+            'invalid': form.get('taskName')?.invalid}"> -->
+            <!-- !! converts undefined to false -->
+
+        <li>taskName valid: {{ form.get('taskName')?.valid }}</li>
+        <li>taskName invalid: {{ form.get('taskName')?.invalid }}</li>
+    </ul>
+    
+    
+    <table>
+
+        <tr>
+            <td>Task Name: </td>
+            <td>
+                <!-- <input type="text" formControlName="taskName"
+                [ngClass]="{ 
+                    'valid': form.get('taskName')?.valid, 
+                    'invalid': form.get('taskName')?.invalid}"> -->
+
+                <input type="text" [formControlName]="taskNameCtrlName"
+                [ngClass]="{ 
+                    'valid': isCtrlValid('taskName'), 
+                    'invalid': isCtrlInvalid('taskName') }">
+            </td>
+         </tr>
+    
+         <tr>
+            <td>Priority: </td>
+            <td>
+                <select formControlName="priority">
+                    <option value="0">Low</option>
+                    <option value="1">Medium</option>
+                    <option value="2">High</option>
+                </select>
+            </td>
+         </tr>
+    
+         <tr>
+            <td>Due Date: </td>
+            <td>
+                <!-- <input type="date" formControlName="dueDate"
+                [ngClass]="{ 
+                    'valid': form.get('dueDate')?.valid, 
+                    'invalid': form.get('dueDate')?.invalid}"> -->
+
+                <input type="date" formControlName="dueDate"
+                [ngClass]="{ 
+                    'valid': isCtrlValid('dueDate'), 
+                    'invalid': isCtrlInvalid('dueDate') }">   
+            </td>
+         </tr>
+    
+         <tr>
+            <td>Urgency: </td>
+            <td>
+                <input type="range" min="1" max="5" (change)="updateUrgency($event)"
+                formControlName="urgency"> ( {{urgency}} )
+            </td>
+         </tr>
+    
+         <tr>
+            <td>Comments: </td>
+            <td>
+                <textarea rows="4" cols="30" formControlName="comments"></textarea>
+            </td>
+         </tr>
+    
+         <tr>
+            <td>Procrastinate: </td>
+            <td>
+                <input type="checkbox" formControlName="procrastinate">
+            </td>
+         </tr>
+    
+         <tr>
+            <td></td>
+            <td>
+                <!-- attribute binding, if form is invalid, disable the button -->
+                <!-- <button type="submit" [disabled]="form.invalid">Submit</button> -->
+                <button type="submit" [disabled]="invalid()">Add</button>
+                <button type="button" (click)="addCollaborator()">Add Collaborator</button>
+            </td>
+         </tr>
+
+    </table>
+
+
+    
+    <h3>Collaborators</h3>
+    @if (collaborators.controls.length > 0) {        
+        <table>
+            <thead>
+                <tr>
+                    <th>Index</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                </tr>  
+            </thead>
+    
+            <tbody formArrayName="collaborators">
+                <!-- for repeating things we use for loop -->
+                 @for (col of collaborators.controls; let idx = $index; track col) {
+                    <!-- we bind the index to the form group name, for every row, the anme is the index, what is track col?? -->
+                    <tr [formGroupName]="idx">
+    
+                        <td> {{ idx + 1 }}</td>
+                        <td>
+                            <!-- these are the form's control -->
+                            <input type="text" formControlName="name">
+                        </td>
+                        <td>
+                            <!-- these are the form's control -->
+                            <input type="text" formControlName="email">
+                        </td>
+                        <td>
+                            <button type="button" (click)="removeCollaborator(idx)">X</button>
+                        </td>
+                    </tr>    
+                    }         
+            </tbody>
+        </table>
+    }
+    @else {
+        <h3>Empty</h3>
+    }
+   
+</form>

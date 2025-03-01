@@ -1,0 +1,9 @@
+<h1>{{ title }}</h1>
+
+<app-display [imgPathInput]="imagePath"></app-display>
+
+<app-pagination (onNavigate)="whenNavigate($event)"></app-pagination>
+
+<!-- image / src actually would both work-->
+<!-- <img [src]="imagePath" alt="Number Image"> -->
+

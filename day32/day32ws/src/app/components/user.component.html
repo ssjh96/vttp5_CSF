@@ -1,0 +1,157 @@
+<h3>Purchase Order</h3>
+<form [formGroup]="userForm" (submit)="processForm()">
+
+    <!-- live view data in json-->
+    {{ userForm.value | json }}
+
+    <!-- First part of the form for user details -->
+    <table>
+
+        <tr>
+            <td>Name: </td>
+            <td>
+                <input type="text" formControlName="name"
+                [ngClass]="{
+                    'valid': isCtrlValid('name'),
+                    'invalid': isCtrlInvalid('name')
+                }">
+            </td>
+        </tr>
+
+        <tr>
+            <td>Address: </td>
+            <td>
+                <input type="text" formControlName="address"
+                [ngClass]="{
+                    'valid': isCtrlValid('address'),
+                    'invalid': isCtrlInvalid('address')
+                }">
+            </td>
+        </tr>
+
+        <tr>
+            <td>Email: </td>
+            <td>
+                <input type="email" formControlName="email"
+                [ngClass]="{
+                    'valid': isCtrlValid('email'),
+                    'invalid': isCtrlInvalid('email')
+                }">
+            </td>
+        </tr>
+
+        <tr>
+            <td>Delivery Date: </td>
+            <td>
+                <input type="date" formControlName="deliveryDate"
+                [ngClass]="{
+                    'valid': isCtrlValid('deliveryDate'),
+                    'invalid': isCtrlInvalid('deliveryDate')
+                }">
+            </td>
+        </tr>
+
+        <tr>
+            <td>Availability: </td>
+            <td formArrayName="availability">
+                <label>
+                    <!-- [formControlName]="index" -->
+                    <input type="checkbox" [formControlName]="0">
+                    <span> 0900-1200</span>
+                </label>
+            </td>
+        </tr>
+
+        <tr>
+            <td></td>
+            <td formArrayName="availability">
+                <label>
+                    <input type="checkbox" [formControlName]="1">
+                    <span> 1200-1600</span>
+                </label>
+            </td>
+        </tr>
+
+        <tr>
+            <td></td>
+            <td formArrayName="availability">
+                <label>
+                    <input type="checkbox" [formControlName]="2">
+                    <span> 1600-2000</span>
+                </label>
+            </td>
+        </tr>
+
+               
+
+        <tr>
+            <td>Urgent: </td>
+            <td>
+                <input type="checkbox" formControlName="urgent">
+            </td>
+        </tr>
+
+    </table>
+
+
+    <!-- Second part of the form for line items -->
+
+    <h3>Line Items</h3>
+    @if (lineItems.controls.length > 0) 
+    {
+        <table class="table table-success table-active">
+
+            <thead>
+                <tr>
+                    <th>S/N</th>
+                    <th>Item Name</th>
+                    <th>Quantity</th>
+                    <th>Unit Price</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            
+            <tbody formArrayName="lineItems">
+                @for (item of lineItems.controls; let idx = $index; track item) 
+                {
+                    <tr [formGroupName]="idx">
+
+                        <td> {{ idx + 1 }} </td>
+
+                        <td>
+                            <input type="text" formControlName="itemName">
+                        </td>
+
+                        <td>
+                            <input type="number" formControlName="quantity" step="1">
+                        </td>
+
+                        <td>
+                            <input type="number" formControlName="unitPrice" step="0.1">
+                        </td>
+                        
+                        <td>
+                            <button type="button" (click)="addLineItem()">Add</button>
+                        </td>
+
+                        <td>
+                            <button type="button" (click)="removeLineItem(idx)">X</button>
+                        </td>
+
+                    </tr>
+                }
+            </tbody>
+
+        </table>
+    }
+    @else {
+        <p>Empty Line Items</p>
+        <button type="button" (click)="addLineItem()">Add</button>
+    }
+
+    <br><br>
+    <button type="submit">Submit</button>
+
+    
+</form>

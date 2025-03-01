@@ -1,0 +1,13 @@
+/* can use the built-in boot strap validations too, (.is-valid / .is-invalid) */
+
+.valid {
+    border: 1px limegreen solid;
+    padding: 1px;
+    border-radius: 4px;
+}
+
+.invalid {
+    border: 1px red solid;
+    padding: 1px;
+    border-radius: 4px;
+}

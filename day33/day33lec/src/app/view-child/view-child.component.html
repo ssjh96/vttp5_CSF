@@ -1,0 +1,35 @@
+<p>{{childText}}</p>
+
+<br><br>
+<h1>Products</h1>
+<br><br>
+<form [formGroup]="productForm">
+    <button (click)="onAddRow()">Add</button>
+    <table>
+        <thead>
+            <tr>
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
+            
+        </thead>
+    
+        <tbody>
+            <tr *ngFor="let row of dynamicRows.controls; let index = index;">
+                <td>
+                    <label name="name">Name</label>
+                    <input formControlName="name">
+                </td>
+                <td>
+                    <label name="name">Description</label>
+                    <input formControlName="description">
+                </td>
+                <td>
+                    <label name="name">Qty</label>
+                    <input formControlName="qty">
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</form>

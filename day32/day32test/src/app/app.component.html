@@ -1,0 +1,54 @@
+<h1> {{ title }} </h1>
+
+<h3>Date: </h3>
+<p> {{date}} </p>
+
+<h3>DateString: </h3>
+<p> {{date1}} </p>
+
+<h3> ISOString: </h3>
+<p> {{date2}} </p>
+
+<h3> Split T: </h3>
+<p> {{date3}} </p>
+
+<h3> index[0]: </h3>
+<p> {{date4}} </p>
+
+
+
+
+<!-- test ngSwitch -->
+<h3 class="text-decoration-underline">Test ngSwitch</h3>
+<p>Select a Product Category:
+  <span>
+    <select (change)="updateCategory($event)">
+      <option value="">-- Select a Category --</option>
+      <option value="rsvp">RSVP</option>
+      <option value="todo">TODO</option>
+    </select>
+  </span>
+</p>
+
+
+
+<!-- ngSwitch to Show Selected Category -->
+<div [ngSwitch]="selectedCategory">
+  
+  <div *ngSwitchCase="'rsvp'">
+    <h3>Rsvp Category</h3>
+    <app-rsvp></app-rsvp>
+  </div>
+
+  <div *ngSwitchCase="'todo'">
+    <h3>Todo Category</h3>
+    <app-todo></app-todo>
+  </div>
+
+
+  <!-- Default case when no selection is made -->
+  <div *ngSwitchDefault>
+    <p class="fw-bold">Please select a category.</p>
+  </div>
+</div>
+<br><br>

@@ -1,0 +1,37 @@
+/* You can add global styles to this file, and also import other style files */
+@import url(https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css);
+
+.red-button {
+    background-color: red;
+    color: white;
+    border-color: black;
+    border-radius: 3px;
+}
+
+.green-button {
+    background-color: green;
+    color:white;
+    border-color: black;
+    border-radius: 3px;
+}
+
+.grey-border {
+    border-color: grey;
+    border-radius: 3px;
+}
+
+.blue-border {
+    border-color: blue;
+    border-radius: 3px;
+}
+
+.active {
+    border-color: limegreen;
+    border-radius: 3px;
+}
+
+.inactive {
+    border-color: red;
+    border-radius: 3px;
+}
+

@@ -1,0 +1,43 @@
+<p>json-reader works!</p>
+<!-- {{data | json}} -->
+
+<div>
+    <select name="countries" placeholder="--Select--">
+        @for (country of data.default; let idx = $index; track country) {
+            <option [value]="country.code">{{country.name}}</option>
+        }
+    </select>
+
+    <!-- countries = afghanistham -->
+</div>
+
+<br><br>
+<h3 class="text-decoration-underline mb-xl-3">Country Switch</h3>
+<p>Select a Country:
+  <span>
+    <select (change)="updateCountry($event)">
+        <option value="">-- Select country --</option>
+        @for (country of data.default; let idx = $index; track country) 
+        {
+            <option value="{{country.code}}">{{country.name}}</option>
+        }
+    </select>
+  </span>
+</p>
+
+<!-- ngSwitch to Show Selected Category -->
+<div [ngSwitch]="selectedCountry">
+
+    @for (country of data.default; let idx = $index; track country) 
+    {
+        <div *ngSwitchCase="country.code">
+            <p>Welcome to {{country.name}}!</p>
+        </div>
+    }
+
+    <!-- Default case when no selection is made -->
+    <div *ngSwitchDefault>
+        <p>Please select a country.</p>
+    </div>
+</div>
+

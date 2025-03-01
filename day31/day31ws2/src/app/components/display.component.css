@@ -1,0 +1,10 @@
+.thumbnail {
+    height: 40vh;
+    border: 1px grey solid;
+    padding: 5px;
+    border-radius: 8px;
+}
+
+h2 {
+    color:blue;
+}

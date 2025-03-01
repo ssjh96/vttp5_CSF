@@ -1,0 +1,114 @@
+<!-- <app-root>{{ title }}</app-root> -->
+<h3 class="text-decoration-underline">
+  This is font size test using: {{ title }}
+</h3>
+<!-- parent receives the this.fontSize output from child, console log displays -->
+<app-font-size [message]="title" (onFontSize)="sizeChanged($event)"></app-font-size>
+<br><br>
+
+
+
+<!-- test ngif -->
+<h3 class="text-decoration-underline">Test ngIf</h3>
+<div *ngIf="cart1.length > 0; else emptyCart">
+  Cart1 has {{ cart1.length }} item(s)
+  <button class="btn btn-danger" (click)="clearCart1()" *ngIf="cart1.length > 0">Clear Cart</button>
+</div>
+
+<!-- template reference for diplaying else content -->
+<ng-template #emptyCart>
+  Your cart is empty
+</ng-template>
+<br><br>
+
+
+
+<!-- test ngfor -->
+<h3 class="text-decoration-underline">Test ngFor</h3>
+Cart2 has {{ cart2.length }} item(s)
+<button class="btn btn-danger" (click)="clearCart2()" *ngIf="cart2.length > 0">Clear Cart</button>
+<ul>
+  <li *ngFor="let item of cart2; let i = index;">
+    {{ i + 1 }}. {{ item }}
+    <button (click)="removeItem(i)">Remove</button>
+  </li>
+</ul>
+<br><br>
+
+
+<!-- test ngSwitch -->
+<h3 class="text-decoration-underline">Test ngSwitch</h3>
+<p>Select a Product Category:
+  <span>
+    <select (change)="updateCategory($event)">
+      <option value="">-- Select a Category --</option>
+      <option value="electronics">Electronics</option>
+      <option value="clothing">Clothing</option>
+      <option value="food">Food</option>
+    </select>
+  </span>
+</p>
+
+
+
+<!-- ngSwitch to Show Selected Category -->
+<div [ngSwitch]="selectedCategory">
+  
+  <div *ngSwitchCase="'electronics'">
+    <h3>Electronics Category</h3>
+    <p>Find the best gadgets here!</p>
+  </div>
+
+  <div *ngSwitchCase="'clothing'">
+    <h3>Clothing Category</h3>
+    <p>Trendy fashion just for you!</p>
+  </div>
+
+  <div *ngSwitchCase="'food'">
+    <h3>Food Category</h3>
+    <p>Delicious meals and snacks!</p>
+  </div>
+
+  <!-- Default case when no selection is made -->
+  <div *ngSwitchDefault>
+    <p class="fw-bold">Please select a category.</p>
+  </div>
+</div>
+<br><br>
+
+
+
+<!-- test ngClass -->
+<h3 class="text-decoration-underline">Test ngClass</h3>
+<input type="text" [disabled]="isDisabled" 
+[ngClass]="{
+  'grey-border': isDisabled,
+  'blue-border': !isDisabled
+}">
+<button (click)="toggleInput()">button</button>
+<br><br><br>
+
+
+
+<!-- example of both ngClass and ngSwitch -->
+<h3 class="text-decoration-underline">Test ngClass & ngSwitch</h3>
+<button (click)="toggleButton($event)"
+  [ngClass]="{
+    'red-button': isActive,
+    'green-button': !isActive
+  }">Click Me</button>
+<!-- Show Active/Inactive using ngSwitch -->
+<div [ngSwitch]="isActive">
+  <div *ngSwitchCase="true">
+    <p class = "active">Status: Active</p>
+  </div>
+  <div *ngSwitchCase="false">
+    <p class="inactive">Status: Inactive</p>
+  </div>
+</div>
+
+<br><br>
+
+
+
+

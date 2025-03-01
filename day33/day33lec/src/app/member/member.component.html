@@ -1,0 +1,76 @@
+<!-- <p>member works!</p> -->
+ <h1>Member Form</h1>
+<form [formGroup]="memberForm" (ngSubmit)="processForm()">
+
+    <div>
+        <label for="name" class="form-label">Name:</label>
+        <input type="text" class="form-control" id="name" formControlName="name"
+        [ngClass]="{
+            'is-valid': isValid('name'),
+            'is-invalid': isInvalid('name')
+        }">
+        <div id="validationServerUsernameFeedback" class="invalid-feedback">
+            Please enter a valid name.
+        </div>
+    </div>
+
+    <div>
+        <label for="email" class="form-label">Email:</label>
+        <input type="text" class="form-control" id="email" formControlName="email"
+        [ngClass]="{
+            'is-valid': isValid('email'),
+            'is-invalid': isInvalid('email')
+        }">
+        <div id="validationServerUsernameFeedback" class="invalid-feedback">
+            Please enter a valid email.
+        </div>
+    </div>
+
+    <div>
+        <label for="phone" class="form-label">Phone:</label>
+        <input type="text" class="form-control" id="phone" formControlName="phone"
+        [ngClass]="{
+            'is-valid': isValid('phone'),
+            'is-invalid': isInvalid('phone')
+        }">
+        <div id="validationServerUsernameFeedback" class="invalid-feedback">
+            Please enter a valid sg number.
+        </div>
+    </div>
+
+    <button type="button" (click)="addHobby()">Add </button>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>S/N</th>
+                <th>Hobbies</th>
+                <th>Actions</th>
+        </thead>
+
+        <tbody formArrayName="hobbies">
+            @for (hobby of hobbiesArray.controls; let idx = $index; track hobby) {
+                <tr [formGroupName]="idx">
+                    <td>{{ idx + 1 }}</td>
+                    <td><input type="text" formControlName="hobby"></td>
+                    <td><button type="button" (click)="removeHobby(idx)">X</button></td>
+                </tr>
+            }
+        </tbody>
+
+
+    </table>
+
+    <button type="submit">Submit</button>
+</form>
+
+{{ memberForm.value | json }}
+
+<br>
+
+<div>Member</div>
+<p>Name: {{member.name}}</p>
+<p>Email: {{member.email}}</p>
+<p>Phone: {{member.phone}}</p>
+<p>Hobbies: {{member.hobbies}}</p>
+

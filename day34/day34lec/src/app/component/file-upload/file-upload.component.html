@@ -1,0 +1,24 @@
+<!-- <p>file-upload works!</p> -->
+<h1>File Upload</h1>
+<hr>
+<br>
+<br>
+<input type="file" (change)="handleFileUpload($event)" #fileInput>
+
+<div>
+    @if (selectedFile) {
+        <section class="file-details">
+            <h3>Selected File</h3>
+            <br>
+            <ul>
+                <li><strong>Filename: </strong> {{selectedFile.name}}</li>
+                <li><strong>Type: </strong> {{selectedFile.type}}</li>
+                <li><strong>Size: </strong> {{selectedFile.size}}</li>
+            </ul>
+        </section>
+
+        <button type="button" (click)="uploadFile()">Upload</button>
+
+    }
+    
+</div>
