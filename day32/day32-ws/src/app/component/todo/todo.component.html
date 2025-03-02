@@ -1,1 +1,53 @@
-<p>todo works!</p>
+<form [formGroup]="todoForm" (ngSubmit)="processForm()">
+
+    <!-- Description -->
+    <div class="row mb-3">
+      <label for="description" class="col-sm-2 col-form-label">Description</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="description" formControlName="description" 
+        [ngClass]="{
+            'is-valid': isValid('description'),
+            'is-invalid': touchedAndInvalid('description')
+        }">
+      </div>
+    </div>
+
+    <!-- Priority -->
+    <fieldset class="row mb-3">
+      <legend class="col-form-label col-sm-2 pt-0">Priority</legend>
+      <div class="col-sm-10">
+        <div class="form-check">
+          <input class="form-check-input" type="radio" formControlName="priority" id="priority-low" value="low">
+          <label class="form-check-label" for="priority-low">
+            Low
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" formControlName="priority" id="priority-mediun" value="medium">
+          <label class="form-check-label" for="priority-medium">
+            Medium
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" formControlName="priority" id="priority-high" value="high">
+          <label class="form-check-label" for="priority-high">
+            High
+          </label>
+        </div>
+      </div>
+    </fieldset>
+
+    <!-- dueDate -->
+    <div class="row mb-3">
+        <label for="dueDate" class="col-sm-2 col-form-label">Due</label>
+        <div class="col-sm-10">
+          <input type="date" class="form-control" id="dueDate" formControlName="dueDate"
+          [ngClass]="{
+            'is-valid': isValid('dueDate'),
+            'is-invalid': touchedAndInvalid('dueDate')
+        }">
+        </div>
+    </div>
+
+    <button type="submit" [disabled]="todoForm.invalid" class="btn btn-primary">Add Todo</button>
+  </form>

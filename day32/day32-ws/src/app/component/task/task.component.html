@@ -1,1 +1,36 @@
-<p>task works!</p>
+<h3 class="text-decoration-underline">Task List</h3>
+
+@if (tasks.length < 1) 
+{
+    <p>Please add a task</p>
+}
+
+@else 
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>S/N</th>
+                <th>Todo Name</th>
+                <th>Priority</th>
+                <th>Due Date</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+    
+        <!-- no need to reference since "tasks" is the reference name for main form -->
+        <tbody>
+            @for (todo of tasks; let idx = $index; track todo) 
+            {
+                <tr>
+                    <td> {{ idx + 1}} </td>
+                    <!-- .value gives the raw Todo Object  -->
+                    <td>{{todo.description}}</td>
+                    <td>{{todo.priority}}</td>
+                    <td>{{todo.dueDate}}</td>
+                    <td><button (click)="removeTodo(idx)">X</button></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
