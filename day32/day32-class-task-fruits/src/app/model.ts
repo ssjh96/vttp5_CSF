@@ -7,3 +7,12 @@ export interface Product
     delta: number;
 }
 
+export interface Order 
+{
+    name: string;
+    address: string;
+    delivery: string;
+    lineItems: Product[]
+
+}
+

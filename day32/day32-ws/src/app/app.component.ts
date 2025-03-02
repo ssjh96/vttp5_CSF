@@ -1,6 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { Todo } from './model';
-import { AbstractControl, FormArray, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 
 
 @Component({

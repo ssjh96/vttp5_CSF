@@ -1,9 +1,60 @@
-@for (product of cart; let index = $index; track product) 
-{
-    <div class="card mb-3">
-        <p>{{ product.name }}</p>
-        <p>{{ product.quantity }}</p>
-        <p>{{ product.price * product.quantity | currency}}</p>
+<form [formGroup]="orderForm" (ngSubmit)="processForm()">
+    <div class="row mb-3">
+        <label for="name" class="col-sm-2 col-form-label">Name: </label>
+        <div class="col-sm-10">
+        <input type="text" class="form-control" id="name" formControlName="name">
+        </div>
     </div>
-    
-}
+
+    <div class="row mb-3">
+        <label for="address" class="col-sm-2 col-form-label">Address: </label>
+        <div class="col-sm-10">
+        <input type="text" class="form-control" id="address" formControlName="address">
+        </div>
+    </div>
+
+    <fieldset class="row mb-3">
+        <legend class="col-form-label col-sm-2 pt-0">Delivery: </legend>
+        <div class="col-sm-10">
+
+            <div class="form-check">
+                <input class="form-check-input" type="radio" formControlName="delivery" id="delivery" value="deliver" checked>
+                <label class="form-check-label" for="delivery">
+                Deliver
+                </label>
+            </div>
+
+            <div class="form-check">
+                <input class="form-check-input" type="radio" formControlName="delivery" id="delivery" value="self pick-up" checked>
+                <label class="form-check-label" for="delivery">
+                Self Pick-up
+                </label>
+            </div>
+
+        </div>
+    </fieldset>
+
+    <table class="table table-striped">
+        <header>
+            <tr>
+                <th>Product</th>
+                <th>Quantity</th>
+                <th>Price</th>
+            </tr>
+        </header>
+
+        <tbody formArrayName="lineItems">
+            @for (lineItem of lineItemsArray.controls; let idx = $index; track lineItem) 
+            {
+                <tr [formGroupName]="idx">
+                    <td>{{ lineItem.value.name }}</td>
+                    <td>{{ lineItem.value.quantity }}</td>
+                    <td>{{ lineItem.value.price * lineItem.value.quantity | currency}}</td>
+                    <button (click)="removeItem(idx)">X</button>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <button type="submit" class="btn btn-primary">Check Out</button>
+</form>

@@ -1,6 +1,5 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Product } from './model';
-import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
@@ -8,7 +7,7 @@ import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
   standalone: false,
   styleUrl: './app.component.css'
 })
-export class AppComponent implements OnInit
+export class AppComponent
 {
   title = 'day32-class-task-fruits';
 
@@ -57,20 +56,6 @@ export class AppComponent implements OnInit
           console.log("cart data: ", this.cartData);
         }
     }
-  }
-
-
-
-  // FORM
-  private fb = inject(FormBuilder)
-  orderForm!: FormGroup
-  lineItemsArray!: FormArray
-
-  ngOnInit(): void {
-    throw new Error('Method not implemented.');
-  }
-
-
-    
+  }    
 }
 
