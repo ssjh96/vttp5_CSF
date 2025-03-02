@@ -1,0 +1,8 @@
+{{title}}
+<div class="side-by-side mx-5 mt-5">
+
+  <app-inventory [products]="productsData" (onSelect)="handleSelection($event)"></app-inventory>
+  
+  <app-cart class="mx-5" [cart]="cartData"></app-cart>
+
+</div>

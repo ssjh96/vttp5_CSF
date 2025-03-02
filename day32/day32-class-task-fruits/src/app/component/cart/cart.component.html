@@ -1,0 +1,9 @@
+@for (product of cart; let index = $index; track product) 
+{
+    <div class="card mb-3">
+        <p>{{ product.name }}</p>
+        <p>{{ product.quantity }}</p>
+        <p>{{ product.price * product.quantity | currency}}</p>
+    </div>
+    
+}

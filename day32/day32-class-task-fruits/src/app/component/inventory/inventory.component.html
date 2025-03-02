@@ -1,0 +1,16 @@
+@for (product of products; let index = $index; track product) {
+    <div class="side-by-side card mb-3">
+        <div class="container mb-3 mt-3">
+            <img [src]="product.image" class="card-img-top product-card" [alt]="product.name">
+        </div>
+    
+        <div class="container mb-3 mt-3 product-details">
+            <h5> Name: {{product.name}}</h5>
+            <h5> Price: {{product.price}}</h5>
+            <button (click)="addProduct(product)"> + </button>  
+            <button (click)="removeProduct(product)"> - </button>  
+              
+        </div>
+    </div>
+    
+}
