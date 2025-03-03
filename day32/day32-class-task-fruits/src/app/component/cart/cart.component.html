@@ -41,50 +41,59 @@
 
         </div>
     </fieldset>
-
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>Product</th>
-                <th>Quantity</th>
-                <th>Price</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-
-        <tbody formArrayName="lineItems">
-            @for (lineItem of lineItemsArray.controls; let idx = $index; track idx) 
-            {
-                <tr [formGroupName]="idx">
-                    <td>{{ lineItem.value.name }}</td>
-                    <td>{{ lineItem.value.quantity }}</td>
-                    <td>{{ lineItem.value.cost | currency}}</td>
-                    <td>
+    
+    <hr>
+    
+    @if (lineItemsArray.length < 1) {
+        <h3>Please add an item...</h3>
+    }
+    @else {
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+    
+            <tbody formArrayName="lineItems">
+                @for (lineItem of lineItemsArray.controls; let idx = $index; track idx) 
+                {
+                    <tr [formGroupName]="idx">
+                        <td>{{ lineItem.value.name }}</td>
+                        <td>{{ lineItem.value.quantity }}</td>
+                        <td>{{ lineItem.value.cost | currency}}</td>
+                        <td>
+                            <button (click)="removeItem(idx)">X</button>
+                        </td>
+                    </tr>
+                }
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>Total: </td>
+                    <td>{{totalCost | currency}}</td>
+                </tr>
+                
+            </tbody>
+    
+            <!-- <tbody formArrayName="lineItems">
+                @for (lineItem of lineItemsArray.controls; let idx = $index; track lineItem) 
+                {
+                    <tr [formGroupName]="idx">
+                        <td>{{ lineItem.value.name }}</td>
+                        <td>{{ lineItem.value.quantity }}</td>
+                        <td>{{ lineItem.value.price * lineItem.value.quantity | currency}}</td>
                         <button (click)="removeItem(idx)">X</button>
-                    </td>
-                </tr>
-            }
-            <tr>
-                <td></td>
-                <td></td>
-                <td>Total: </td>
-                <td>{{totalCost | currency}}</td>
-            </tr>
-            
-        </tbody>
+                    </tr>
+                }
+            </tbody> -->
+        </table>
+    }
+    
+    <br>
 
-        <!-- <tbody formArrayName="lineItems">
-            @for (lineItem of lineItemsArray.controls; let idx = $index; track lineItem) 
-            {
-                <tr [formGroupName]="idx">
-                    <td>{{ lineItem.value.name }}</td>
-                    <td>{{ lineItem.value.quantity }}</td>
-                    <td>{{ lineItem.value.price * lineItem.value.quantity | currency}}</td>
-                    <button (click)="removeItem(idx)">X</button>
-                </tr>
-            }
-        </tbody> -->
-    </table>
-
-    <button type="submit" class="btn btn-primary">Check Out</button>
+    <button type="submit" class="btn btn-primary" [disabled]="orderForm.invalid">Check Out</button>
 </form>
