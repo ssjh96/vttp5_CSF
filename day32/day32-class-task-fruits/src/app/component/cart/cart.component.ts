@@ -21,10 +21,15 @@ export class CartComponent implements OnChanges
 
   // ngOnInit(): void {
   //   this.orderForm = this.createOrderForm()
+  //  This runs after the constructor and after Angular sets up the component.
+  //  Use this to set up things that rely on inputs, like fetching data based on an @Input() value.
   // }
 
   // constructor happens before oninit, inject fb thn use fb in createOrderForm method
+   // The constructor injects FormBuilder into the component
+  //  The constructor is like the “setup” function for your component class.
   constructor(private fb: FormBuilder) {
+     // Here, we use the injected FormBuilder to create the form as soon as the component is constructed
     this.orderForm = this.createOrderForm();
   }
 
