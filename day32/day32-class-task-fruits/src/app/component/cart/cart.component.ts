@@ -1,6 +1,6 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { Product, PurchaseOrder } from '../../model';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-cart',
@@ -101,6 +101,9 @@ export class CartComponent implements OnChanges
 
   protected removeItem(idx: number): void
   {
+    const cost = this.cart[idx].price * this.cart[idx].quantity 
+    this.totalCost -= cost;
+
     // Remove from cart array
     this.cart.splice(idx, 1);
 
@@ -109,6 +112,20 @@ export class CartComponent implements OnChanges
 
     // Force update by reassigning cart (to trigger ngOnChanges)
     this.cart = [...this.cart];
+
+  }
+
+
+  // Validations
+  protected touchedAndInvalid(ctrlName: string): boolean
+  {
+    const ctrl = this.orderForm.get(ctrlName) as FormControl
+    return ctrl.touched && ctrl.invalid
+  }
+
+  protected isValid(ctrlName: string): boolean
+  {
+    return !!this.orderForm.get(ctrlName)?.valid
   }
 
 }

@@ -2,14 +2,22 @@
     <div class="row mb-3">
         <label for="name" class="col-sm-2 col-form-label">Name: </label>
         <div class="col-sm-10">
-        <input type="text" class="form-control" id="name" formControlName="name">
+        <input type="text" class="form-control" id="name" formControlName="name" 
+        [ngClass]="{
+            'is-valid': isValid('name'),
+            'is-invalid': touchedAndInvalid('name')
+        }">
         </div>
     </div>
 
     <div class="row mb-3">
         <label for="address" class="col-sm-2 col-form-label">Address: </label>
         <div class="col-sm-10">
-        <input type="text" class="form-control" id="address" formControlName="address">
+        <input type="text" class="form-control" id="address" formControlName="address"
+        [ngClass]="{
+            'is-valid': isValid('address'),
+            'is-invalid': touchedAndInvalid('address')
+        }">
         </div>
     </div>
 
