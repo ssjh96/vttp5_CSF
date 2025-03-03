@@ -1,16 +1,62 @@
 @for (product of products; let index = $index; track product) {
-    <div class="side-by-side card mb-3">
+
+    <div>
+      <mat-card class="align mb-3" appearance="outlined">
+        <div>
+            <img class="image" mat-card-image [src]="product.image" [alt]="product.name">
+        </div>
+        
+        <div>
+            <mat-card-content>
+                <h5> Name: {{product.name}}</h5>
+                <h5> Price: {{product.price}}</h5>
+            </mat-card-content>
+            <mat-card-actions>
+                <button mat-stroked-button (click)="addProduct(product)"> + </button>
+                <button mat-stroked-button (click)="removeProduct(product)"> - </button>
+            </mat-card-actions>
+        </div>
+      </mat-card>
+    
+    </div>
+
+      
+
+      
+    <!-- <div class="side-by-side card mb-3">
         <div class="container mb-3 mt-3">
             <img [src]="product.image" class="card-img-top product-card" [alt]="product.name">
         </div>
-    
-        <div class="container mb-3 mt-3 product-details">
-            <h5> Name: {{product.name}}</h5>
-            <h5> Price: {{product.price}}</h5>
-            <button (click)="addProduct(product)"> + </button>  
-            <button (click)="removeProduct(product)"> - </button>  
-              
-        </div>
-    </div>
+
+        <section>
+             <div class="container mb-3 mt-3 product-details">
+                <h5> Name: {{product.name}}</h5>
+                <h5> Price: {{product.price}}</h5>
+                <button (click)="addProduct(product)"> + </button>  
+                <button (click)="removeProduct(product)"> - </button> 
+            </div>
+          </section>       
+    </div> -->
     
 }
+
+
+<!-- /* Make the mat-card a flex container */
+.side-by-side {
+  display: flex;
+  flex-direction: row;       /* Arrange children in a row */
+  align-items: center;       /* Vertically center items */
+  gap: 1rem;                 /* Space between image and content */
+}
+
+/* Set a fixed width for the image so it always stays on the left */
+.side-by-side > img.image {
+  width: 150px;              /* Adjust as needed */
+  height: auto;
+  object-fit: cover;         /* Ensure the image covers the area without distortion */
+}
+
+/* Let the right side content take the remaining space */
+.side-by-side > div {
+  flex: 1;
+} -->

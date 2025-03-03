@@ -1,0 +1,86 @@
+<!-- BUTTONS -->
+ <!-- Basic button -->
+<button mat-button>Press</button>
+
+<!-- Raised button with a primary color -->
+<button mat-raised-button color="primary">Press</button>
+
+<!-- Icon button -->
+<button mat-icon-button color="accent">
+  <mat-icon>favorite</mat-icon>
+</button>
+
+
+
+<!-- FORM FIELDS -->
+ <!-- Angular Material provides <mat-form-field> to wrap inputs and style them consistently. -->
+<mat-form-field appearance="fill">
+    <mat-label>Email</mat-label>
+    <input matInput placeholder="Please enter your email">
+  </mat-form-field>
+  <!-- mat-label is a newer approach to labeling form fields. appearance="fill" is one of the style variants (others: outline, standard). -->
+
+
+
+  <!-- RADIO -->
+  <mat-radio-group formControlName="attending">
+    <mat-radio-button value="yes">Yes</mat-radio-button>
+    <mat-radio-button value="no">No</mat-radio-button>
+  </mat-radio-group>
+  <!-- Grouping radio buttons under <mat-radio-group> ensures they behave as a set. -->
+  
+
+
+
+<!-- SELECT -->
+<mat-form-field>
+    <mat-label>Guest</mat-label>
+    <mat-select formControlName="guest">
+    <mat-option *ngFor="let g of [1, 2, 3]" [value]="g">
+        {{ g }}
+    </mat-option>
+    </mat-select>
+</mat-form-field>
+
+
+
+<!-- CHECKBOX -->
+<mat-checkbox formControlName="newsletter">
+    Yes, I wish to receive newsletter
+  </mat-checkbox>
+  <!-- Multiple checkboxes can be handled with an array or multiple form controls, depending on your data structure. -->
+  
+
+
+
+  <!-- SLIDE TOGGLE -->
+  <mat-slide-toggle formControlName="newsletter">
+    Subscribe to newsletter?
+  </mat-slide-toggle>
+  <!-- A switch-like toggle (on/off). -->
+
+
+
+  <!-- DATE PICKER -->
+  <!-- Angular Material’s date picker requires a date adapter:
+        MatNativeDateModule (uses the native JavaScript Date).
+        MatMomentDateModule (uses Moment.js).
+        Or MatLuxonDateModule, etc.
+        Example using the native date adapter: -->
+  <mat-form-field appearance="fill">
+    <mat-label>Date of Birth</mat-label>
+    <input matInput [matDatepicker]="picker" formControlName="dob">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+  <!-- Key Points:
+
+Import MatDatepickerModule and either MatNativeDateModule or another date adapter.
+[matDatepicker]="picker" references a <mat-datepicker #picker>. -->
+
+
+
+  
+        
+  
+      

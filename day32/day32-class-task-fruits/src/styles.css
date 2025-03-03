@@ -6,6 +6,11 @@
     grid-template-columns: repeat(2, 1fr);
 }
 
+.align {
+    align-items: center;
+}
+
+
 .product-card {
     border: 1px solid black;
     border-radius: 25px;
@@ -20,3 +25,16 @@
 
 
   
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+.example-full-width {
+    width: 100%;
+  }
+
+
+.image {
+    height: 200px;
+    width: 200px;
+}

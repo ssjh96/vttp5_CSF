@@ -91,7 +91,17 @@ export class CartComponent implements OnChanges
     if(this.orderForm.valid)
     {
       const po: PurchaseOrder = this.orderForm.value
-      console.log("Form Submitted: ", this.orderForm.value)
+      console.log("Form Submitted: ", po)
+
+      // convert object to JsonString, null, 2 adds indentation for readability
+      alert(`Form Submitted: ${JSON.stringify(po, null, 2)}`)
+      // po: The object (Purchase Order) you want to stringify.
+      // null: Indicates that you're not using a replacer function or array.
+      // 2: Specifies that the output should be indented using 2 spaces.
+
+      this.cart = []
+      this.lineItemsArray.clear()
+      this.orderForm.reset()   
     }
     else
     {

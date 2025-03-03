@@ -1,0 +1,17 @@
+<h2>Registration Form</h2>
+<p>{{title}}</p>
+<form [formGroup]="form" style="border:1px solid #ccc; padding:10px; margin-bottom:20px;">
+  <!-- Example fields in the form -->
+  <label for="email">Email:</label>
+  <input id="email" type="email" formControlName="email" placeholder="Enter your email">
+  <br>
+  <label for="email">Name:</label>
+  <input id="name" type="text" formControlName="name" placeholder="Enter your name">
+  <br><br>
+
+  <!-- 
+    The content from the parent will be projected here.
+    This can be a button, or any markup that the parent wants to insert.
+  -->
+  <ng-content></ng-content>
+</form>
