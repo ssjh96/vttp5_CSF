@@ -1,5 +1,5 @@
-import { Component, inject, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import { Product } from '../../model';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Product, PurchaseOrder } from '../../model';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
@@ -8,17 +8,47 @@ import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
   templateUrl: './cart.component.html',
   styleUrl: './cart.component.css'
 })
-export class CartComponent implements OnInit, OnChanges
+export class CartComponent implements OnChanges
 {
+  
   // for receiving cartData from parent
+  // ngOnChanges only works for @Input() properties where name is the key
   @Input() cart: Product[] = []; 
 
-  private fb = inject(FormBuilder)
+  // private fb = inject(FormBuilder)
   orderForm!: FormGroup
   lineItemsArray!: FormArray
 
-  ngOnInit(): void {
-    this.orderForm = this.createOrderForm()
+  // ngOnInit(): void {
+  //   this.orderForm = this.createOrderForm()
+  // }
+
+  // constructor happens before oninit, inject fb thn use fb in createOrderForm method
+  constructor(private fb: FormBuilder) {
+    this.orderForm = this.createOrderForm();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if(changes['cart']){
+      console.log('CHANGE DETECTED')
+      // console.log("Cart data changed:", changes['cart']);
+      // console.log("Previous Value:", changes['cart'].previousValue);
+      // console.log("Current Value:", changes['cart'].currentValue);
+      this.populateLineItemsArray();
+    }
+  }
+
+  // Sync cart -> lineItemsArray
+  private populateLineItemsArray(): void {
+    this.lineItemsArray.clear();
+    this.cart.forEach((product) => {
+      const lineItem = this.fb.group({
+        name: product.name,
+        quantity: product.quantity,
+        price: product.price
+      });
+      this.lineItemsArray.push(lineItem);
+    });
   }
 
 
@@ -39,6 +69,7 @@ export class CartComponent implements OnInit, OnChanges
   {
     if(this.orderForm.valid)
     {
+      const po: PurchaseOrder = this.orderForm.value
       console.log("Form Submitted: ", this.orderForm.value)
     }
     else
@@ -49,8 +80,17 @@ export class CartComponent implements OnInit, OnChanges
 
   protected removeItem(idx: number): void
   {
+    // Remove from cart array
+    this.cart.splice(idx, 1);
+
+    // Remove from FormArray
     this.lineItemsArray.removeAt(idx);
+
+    // Force update by reassigning cart (to trigger ngOnChanges)
+    this.cart = [...this.cart];
   }
+
+
 
 
 

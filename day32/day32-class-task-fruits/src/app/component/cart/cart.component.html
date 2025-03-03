@@ -35,15 +35,30 @@
     </fieldset>
 
     <table class="table table-striped">
-        <header>
+        <thead>
             <tr>
                 <th>Product</th>
                 <th>Quantity</th>
                 <th>Price</th>
+                <th>Action</th>
             </tr>
-        </header>
+        </thead>
 
-        <tbody formArrayName="lineItems">
+        <tbody>
+            @for (lineItem of cart; let idx = $index; track lineItem) 
+            {
+                <tr>
+                    <td>{{ lineItem.name }}</td>
+                    <td>{{ lineItem.quantity }}</td>
+                    <td>{{ lineItem.price * lineItem.quantity | currency}}</td>
+                    <td>
+                        <button (click)="removeItem(idx)">X</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+
+        <!-- <tbody formArrayName="lineItems">
             @for (lineItem of lineItemsArray.controls; let idx = $index; track lineItem) 
             {
                 <tr [formGroupName]="idx">
@@ -53,7 +68,7 @@
                     <button (click)="removeItem(idx)">X</button>
                 </tr>
             }
-        </tbody>
+        </tbody> -->
     </table>
 
     <button type="submit" class="btn btn-primary">Check Out</button>

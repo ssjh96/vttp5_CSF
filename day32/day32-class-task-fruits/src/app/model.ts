@@ -7,12 +7,18 @@ export interface Product
     delta: number;
 }
 
-export interface Order 
+export interface lineItem
+{
+    name: string;
+    quantity: number;
+    price: string;
+}
+
+export interface PurchaseOrder 
 {
     name: string;
     address: string;
     delivery: string;
-    lineItems: Product[]
+    lineItems: lineItem[]
 
 }
-
