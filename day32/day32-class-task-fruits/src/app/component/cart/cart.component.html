@@ -79,7 +79,8 @@
                         <td>{{ lineItem.value.quantity }}</td>
                         <td>{{ lineItem.value.cost | currency}}</td>
                         <td>
-                            <button (click)="removeItem(idx)">X</button>
+                            <button type="button" (click)="removeItem(idx)">
+                                <mat-icon>delete</mat-icon></button>
                         </td>
                     </tr>
                 }

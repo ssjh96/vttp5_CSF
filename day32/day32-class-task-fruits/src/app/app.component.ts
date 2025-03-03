@@ -24,15 +24,23 @@ export class AppComponent
 
   protected handleSelection(product : Product) {
     if (product.delta == 1) {
-      if(!this.cartData.includes(product)) {
+      if(!this.cartData.includes(product)) 
+      {
         product.quantity++;
         this.cartData.push(product);
       }
-      product.quantity++;
+      else
+      {
+        product.quantity++;
+      }
+      
     } 
-    else if (product.delta == -1) {
-      if(this.cartData.includes(product)) {
+    else if (product.delta == -1) 
+    {
+      if(this.cartData.includes(product)) 
+      {
         product.quantity--;
+
         if(product.quantity == 0) {
           // p is the parameter representing each product in cartData as it is iterated
           // p.name === product.name
@@ -55,6 +63,7 @@ export class AppComponent
     this.cartData = [...this.cartData];
 
     console.log('cartData:', this.cartData);
+    console.log('productData: ', this.productsData)
   }    
 }
 

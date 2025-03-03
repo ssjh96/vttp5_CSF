@@ -73,6 +73,15 @@ export class CartComponent implements OnChanges
     console.log("total cost: ", this.totalCost)
   }
 
+
+  private resetProductQuantity()
+  {
+    this.cart.forEach(product => {
+      product.quantity = 0;
+    });
+  }
+
+
   protected createOrderForm(): FormGroup
   {
     this.lineItemsArray = this.fb.array([])
@@ -85,6 +94,8 @@ export class CartComponent implements OnChanges
       lineItems: this.lineItemsArray
     })
   }
+
+
 
   protected processForm(): void
   {
@@ -99,6 +110,7 @@ export class CartComponent implements OnChanges
       // null: Indicates that you're not using a replacer function or array.
       // 2: Specifies that the output should be indented using 2 spaces.
 
+      this.resetProductQuantity()
       this.cart = []
       this.lineItemsArray.clear()
       this.orderForm.reset()   
@@ -114,6 +126,9 @@ export class CartComponent implements OnChanges
     const cost = this.cart[idx].price * this.cart[idx].quantity 
     this.totalCost -= cost;
 
+    // Reset product quantity
+    this.cart[idx].quantity = 0
+
     // Remove from cart array
     this.cart.splice(idx, 1);
 
@@ -122,7 +137,6 @@ export class CartComponent implements OnChanges
 
     // Force update by reassigning cart (to trigger ngOnChanges)
     this.cart = [...this.cart];
-
   }
 
 
