@@ -44,18 +44,25 @@
             </tr>
         </thead>
 
-        <tbody>
-            @for (lineItem of cart; let idx = $index; track lineItem) 
+        <tbody formArrayName="lineItems">
+            @for (lineItem of lineItemsArray.controls; let idx = $index; track idx) 
             {
-                <tr>
-                    <td>{{ lineItem.name }}</td>
-                    <td>{{ lineItem.quantity }}</td>
-                    <td>{{ lineItem.price * lineItem.quantity | currency}}</td>
+                <tr [formGroupName]="idx">
+                    <td>{{ lineItem.value.name }}</td>
+                    <td>{{ lineItem.value.quantity }}</td>
+                    <td>{{ lineItem.value.cost | currency}}</td>
                     <td>
                         <button (click)="removeItem(idx)">X</button>
                     </td>
                 </tr>
             }
+            <tr>
+                <td></td>
+                <td></td>
+                <td>Total: </td>
+                <td>{{totalCost | currency}}</td>
+            </tr>
+            
         </tbody>
 
         <!-- <tbody formArrayName="lineItems">

@@ -18,6 +18,7 @@ export class CartComponent implements OnChanges
   // private fb = inject(FormBuilder)
   orderForm!: FormGroup
   lineItemsArray!: FormArray
+  totalCost = 0
 
   // ngOnInit(): void {
   //   this.orderForm = this.createOrderForm()
@@ -50,12 +51,27 @@ export class CartComponent implements OnChanges
       const lineItem = this.fb.group({
         name: product.name,
         quantity: product.quantity,
-        price: product.price
+        price: product.price,
+        cost: product.price * product.quantity
       });
       this.lineItemsArray.push(lineItem);
     });
+    this.sumTotal();
   }
 
+  private sumTotal(): void 
+  {
+    let total = 0 // local var total
+    // Loop through each control in the FormArray
+    this.lineItemsArray.controls.forEach(li => {
+      // Get the cost from each lineItem. Ensure cost is a number
+      const cost = li.value.cost
+      total += cost
+    });
+
+    this.totalCost = total // assigned to global
+    console.log("total cost: ", this.totalCost)
+  }
 
   protected createOrderForm(): FormGroup
   {
@@ -94,11 +110,5 @@ export class CartComponent implements OnChanges
     // Force update by reassigning cart (to trigger ngOnChanges)
     this.cart = [...this.cart];
   }
-
-
-
-
-
-
 
 }

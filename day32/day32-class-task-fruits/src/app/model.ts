@@ -12,6 +12,7 @@ export interface lineItem
     name: string;
     quantity: number;
     price: string;
+    cost: number;
 }
 
 export interface PurchaseOrder 
