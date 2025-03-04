@@ -1,0 +1,11 @@
+<p>show-task works!</p>
+<div class="container">
+    <ol>
+        @for (x of tasks; let idx = $index; track $index) 
+        {
+            <li>
+                {{ x }}
+            </li>
+        }
+    </ol>
+</div>

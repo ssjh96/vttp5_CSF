@@ -1,0 +1,38 @@
+<div class="container">
+  <h2>Observables in Angular</h2>
+  @for (x of dataList; let idx = $index; track $index) {
+    <div>
+      {{ x }}
+    </div>
+  }
+  
+<!-- on click, subscribe to myObservable, data rcv put into data[] -->
+  <button (click)="getAsyncData()">Get Data</button>
+  <button (click)="getAsyncData2()">Get Data (OF)</button>
+  <button (click)="getAsyncData3()">Get Data (FROM)</button>
+  <button (click)="getAsyncData4()">Get Data (CONVERT)</button>
+  <button (click)="getAsyncData5()">Get Data (MAP)</button>
+  <button (click)="getAsyncData6()">Get Data (FILTER)</button>
+  
+
+<div id="divId">
+
+</div>
+<button #createBtn>Create Item</button>
+<!-- click button will get an event, the event we use to create an observable -->
+
+</div>
+
+<hr>
+
+<div class="container">
+  <app-new-task></app-new-task>
+
+  <br>
+
+  <app-show-task></app-show-task>
+
+  <br>
+
+  <app-subject></app-subject>
+</div>
