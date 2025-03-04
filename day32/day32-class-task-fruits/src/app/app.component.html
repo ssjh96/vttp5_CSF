@@ -3,6 +3,6 @@
 
   <app-inventory [products]="productsData" (onSelect)="handleSelection($event)"></app-inventory>
   
-  <app-cart class="mx-5" [cart]="cartData"></app-cart>
+  <app-cart class="mx-5" [cart]="cartData" (onRemove)="handleRemove($event)" (onProcess)="handleClearCart($event)"></app-cart>
 
 </div>

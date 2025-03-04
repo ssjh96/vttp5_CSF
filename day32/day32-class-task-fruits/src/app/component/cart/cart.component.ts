@@ -1,6 +1,7 @@
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { Product, PurchaseOrder } from '../../model';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-cart',
@@ -14,6 +15,9 @@ export class CartComponent implements OnChanges
   // for receiving cartData from parent
   // ngOnChanges only works for @Input() properties where name is the key
   @Input() cart: Product[] = []; 
+
+  @Output() onRemove = new Subject<number>()
+  @Output() onProcess = new Subject<Product[]>()
 
   // private fb = inject(FormBuilder)
   orderForm!: FormGroup
@@ -110,8 +114,11 @@ export class CartComponent implements OnChanges
       // null: Indicates that you're not using a replacer function or array.
       // 2: Specifies that the output should be indented using 2 spaces.
 
+      // reset quantity and emit event to parent (`AppComponent`) to clear cart
       this.resetProductQuantity()
       this.cart = []
+      this.onProcess.next(this.cart) // emit empty array to indicate cart reset
+
       this.lineItemsArray.clear()
       this.orderForm.reset()   
     }
@@ -126,17 +133,14 @@ export class CartComponent implements OnChanges
     const cost = this.cart[idx].price * this.cart[idx].quantity 
     this.totalCost -= cost;
 
-    // Reset product quantity
-    this.cart[idx].quantity = 0
-
-    // Remove from cart array
-    this.cart.splice(idx, 1);
+    // Emit removal
+    this.onRemove.next(idx)
 
     // Remove from FormArray
     this.lineItemsArray.removeAt(idx);
 
-    // Force update by reassigning cart (to trigger ngOnChanges)
-    this.cart = [...this.cart];
+    console.log('lineItemsArray after remove: ', this.lineItemsArray.value)
+    console.log('cart data after remove: ', this.cart)
   }
 
 
