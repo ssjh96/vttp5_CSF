@@ -11,9 +11,9 @@ export class WeatherService {
 
   private baseUrl = 'https://api.weatherapi.com/v1/current.json'
 
-  // ?key=db403e8af1aa4ff296325345240612&q=London&aqi=no
+  // ?key=apikey&q=London&aqi=no
 
-  private apiKey = 'apikey'
+  private apiKey = 'apiKey'
 
 
   public getWeatherData(city: string): Observable<any>
