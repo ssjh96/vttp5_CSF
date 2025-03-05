@@ -1,0 +1,55 @@
+<div class="page-header-topbar">
+  <div class="page-header-secondary-msg">
+    <ul class="social-icons">
+      <li><a class="facebook" href="#"><i class="fa fa-facebook"></i></a></li>
+      <li><a class="twitter" href="#"><i class="fa fa-twitter"></i></a></li>
+      <li><a class="dribbble" href="#"><i class="fa fa-dribbble"></i></a></li>
+      <li><a class="linkedin" href="#"><i class="fa fa-linkedin"></i></a></li>   
+    </ul>
+  </div>  
+  <div class="page-header-secondary-nav">
+    <a href="#">SEARCH</a>
+    <a href="#">POPULAR</a>
+    <a href="#">TESTIMONY</a>
+    <a href="#">SERVICES</a>
+    <a href="#">CONTACT</a>
+  </div>
+</div>
+<div class="page-header">
+    <!--HOME HEADER-->
+    <div class="page-header-logo">
+      <h2>procademy</h2>
+    </div>
+    <div>
+      <div class="page-header-secondary">
+        
+      </div>      
+      <div class="page-header-primary">
+        <div class="page-header-primary-nav">
+          <!-- active is a css class -->
+           <!-- when a child route is active, all the parents are active-->
+            <!-- e.g. if home link is root, /about will bold both -->
+             <!-- using activeoptions, exact true solves the problem of bolding all -->
+            <a [routerLink]="['Home']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}">HOME</a>
+            <a [routerLink]="['About']" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{exact: true}">ABOUT</a>
+            <a [routerLink]="['Contact']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}">CONTACT</a>
+            <a [routerLink]="['Courses']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}">COURSES</a>
+        </div>
+
+        <!-- Absolute pathing -->
+        <!-- using / before the path in routerLink, like /Home, this is an absolute path -->
+         <!-- /Home will be directly appeneded to the root url like localhost:4200/Home -->
+
+         <!-- Relative pathing -->
+          <!-- Relative path is appended to the currently active route -->
+           <!-- localhost:4200/About/Home -->
+            <!-- only is home button is defined inside the About -->
+             <!-- Home has a button called courses, so we can go to Home/Courses -->
+        <div class="page-header-login-logout">
+            <a routerLink="Login">LOGIN</a>
+            <a href="#">LOGOUT</a>
+        </div>
+      </div>
+      
+    </div>
+  </div>
