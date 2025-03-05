@@ -1,0 +1,32 @@
+<!-- <p>details works!</p> -->
+
+<div class="container">
+    <form [formGroup]="weatherForm" (ngSubmit)="processForm()">
+        <div>
+            <label for="city" class="form-label">City</label>
+            <input type="city" class="form-control" id="city" formControlName="city" 
+            [ngClass]="{
+                'is-valid': isValid('city'),
+                'is-invalid': touchedAndInvalid('city')
+            }">
+        </div>
+
+        <button type="submit">Submit</button>
+    </form>
+
+    @if (resultData) {
+        <table>
+            <!-- map needs pipe to keyvalue -->
+            @for (result of resultData | keyvalue; track $index) {
+                <tr>
+                    <th>{{result.key}}: </th>
+                    <td>{{result.value}}</td>
+                </tr>
+            }
+        </table>
+    }
+    @else {
+        <p>Please enter a city..</p>
+    }
+
+</div>
