@@ -8,13 +8,15 @@ import { ShowTaskComponent } from './component/show-task/show-task.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SubjectComponent } from './component/subject/subject.component';
 import { provideHttpClient } from '@angular/common/http';
+import { UnsubscribeComponent } from './component/unsubscribe/unsubscribe.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NewTaskComponent,
     ShowTaskComponent,
-    SubjectComponent
+    SubjectComponent,
+    UnsubscribeComponent
   ],
   imports: [
     BrowserModule,

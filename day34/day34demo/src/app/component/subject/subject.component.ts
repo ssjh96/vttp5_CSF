@@ -90,6 +90,39 @@ export class SubjectComponent implements OnInit
     // subject can be 
     // Observer: It subscribes to an Observable (in this case, randomUserObs).
     // Observable: It emits the received data to all its subscribers.
+
+
+
+    // OBSERVABLE VS PROMSIE
+    // Promise is eager, it will execute even without subscription
+    // promise always return data
+    // promise can only emit single value
+    const promise = new Promise((resolve, reject) => {
+      console.log("promise is called");
+      resolve('value: ' + 100);   // only 100 is emitted, a promise can only emit 1 value at a time
+      // resolve('value: ' + 200);
+      // resolve('value: ' + 300);
+      reject('error in promise');
+    })
+
+    promise.then((data) => {
+      console.log("data logged: ", data);
+    })
+    .catch((error) => {
+      console.log(error)
+    })
+
+    // Observer is only called when there's a subscriber
+    // observer only return when subsribed
+    // observable can emit single or multi value (stream of data)
+    const obsExample = new Observable((observer) => {
+      console.log("Observable is called");
+      observer.next('value: ' + 100);
+      observer.next('value: ' + 200);
+      observer.next('value: ' + 300);
+    })
+
+    obsExample.subscribe((data) => console.log("logged: ", data))
   }
 
   private baseUrl: string = 'https://randomuser.me/api/'

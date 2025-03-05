@@ -1,0 +1,30 @@
+<h1>Unsubscribing to an Observable</h1>
+<h1>
+    <div class="container">
+        <h2>Subscriber 1</h2>
+        <hr>
+        <!-- @for (x of [1,2,3,4,5]; track $index) { -->
+        @for (x of data; track $index) {
+            <div>
+                {{ x }}
+            </div>
+        }
+        <button (click)="onSubscribe()">subscribe</button>
+        <button (click)="onUnsubscribe()">unsubscribe</button>
+    </div>
+
+    <div class="container">
+        <h2>Subscriber 1</h2>
+        <hr>
+        <!-- @for (x of [1,2,3,4,5]; track $index) { -->
+        @for (x of data; track $index) {
+            <div>
+                {{ x }}
+            </div>
+        }
+        <button (click)="onSubscribe()">subscribe</button>
+        <button (click)="onUnsubscribe()">unsubscribe</button>
+    </div>
+
+    
+</h1>
